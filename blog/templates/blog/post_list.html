@@ -20,30 +20,16 @@
 	<p>Hi there!!!</p>
 	<p>It works!!!</p>
 </html> -->
-
-<html>
-    <head>
-        <title>Ansara's blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="">Ansara's Blog</a></h1>
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for post in posts %}
+        <div class='post'>
+                <h2><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h2>
+            <div class="date">
+	            {{post.published_date}}
+            </div>
+            <p>{{post.text|linebreaksbr}}</p>
         </div>
-
-        <div>
-        	{% for post in posts %}
-        		<div>
-					<h2><a href="">{{post.title}}</a></h2>
-        			<p>published: {{post.published_date}}</p>
-					<p>{{post.text|linebreaksbr}}</p>
-        		</div>
-        	{% endfor %}  
-        </div>
-
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My second post</a></h2>
-            <p>My second para</p>
-        </div>
-    </body>
-</html>
+    {% endfor %}  
+{% endblock %}  
+                
